@@ -1,0 +1,27 @@
+src/components/CreateSquadForm.tsx
+  s_6e98143322f408::t_68a15a8e94859f 8
+  s_6e98143322f408::t_dadfa1e354a337 40-41
+  s_6e98143322f408::t_108f8c66fe9f5b 84
+src/lib/transaction/importTransaction.ts
+  s_6e98143322f408::t_d448818972ac7a 16
+  s_6e98143322f408::t_6f07557b11b67a 78
+src/lib/signAndSend.ts
+  s_6e98143322f408::t_e0f26f9d70a379 2-6,10-14,16-24,28-32
+  s_6e98143322f408::t_107de84a2eef91 1,7-9,15,25-27
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.4",
+  "base_commit_sha": "962c22ec2aff34f9294ef1cd6afc710cbd82eaa1",
+  "prompts": {},
+  "sessions": {
+    "s_6e98143322f408": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "2388ff51-b01d-4bed-9f5e-1bdfb3190ede",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Tristan <34117851+0xtristan@users.noreply.github.com>"
+    }
+  }
+}
