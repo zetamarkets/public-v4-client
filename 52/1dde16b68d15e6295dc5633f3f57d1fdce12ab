@@ -1,0 +1,28 @@
+src/lib/signAndSend.ts
+  s_6e98143322f408::t_c3e3e17e8edb78 1-10,13-37,44-46,58-59,64-65,67-73,76,78-84
+src/hooks/useSettings.tsx
+  s_6e98143322f408::t_4fe7faba87c003 64-98
+src/components/MultisigInput.tsx
+  s_6e98143322f408::t_3916d15a51b4dd 57
+src/components/SetJitoTipInput.tsx
+  s_6e98143322f408::t_be179325e69146 1-76
+src/routes/settings.tsx
+  s_6e98143322f408::t_240bbacaf73cba 5
+  s_6e98143322f408::t_8c6e08edee2b6e 43-54
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.4",
+  "base_commit_sha": "521dde16b68d15e6295dc5633f3f57d1fdce12ab",
+  "prompts": {},
+  "sessions": {
+    "s_6e98143322f408": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "2388ff51-b01d-4bed-9f5e-1bdfb3190ede",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Tristan <34117851+0xtristan@users.noreply.github.com>"
+    }
+  }
+}
