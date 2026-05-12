@@ -96,8 +96,6 @@ export default function CreateSquadForm({}: {}) {
       setMultisigAddress.mutate(multisig.toBase58());
 
       return { signature, multisig: multisig.toBase58() };
-    } catch (error: unknown) {
-      throw error;
     } finally {
       await new Promise((resolve) => setTimeout(resolve, 5000));
     }

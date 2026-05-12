@@ -54,6 +54,7 @@ const MultisigInput = ({ onUpdate }: { onUpdate: () => void }) => {
         pubkey = new PublicKey(trimmed);
       } catch {
         setError('Invalid public key format.');
+        setLoading(false);
         return;
       }
       const connection = new Connection(rpcUrl, 'confirmed');
