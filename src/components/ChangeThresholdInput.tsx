@@ -2,6 +2,7 @@ import { Button } from './ui/button';
 import { formatTransactionError } from '@/lib/utils';
 import { Input } from './ui/input';
 import { useWallet } from '@solana/wallet-adapter-react';
+import { signAndSend } from '@/lib/signAndSend';
 import { useState, useRef } from 'react';
 import { useWalletModal } from '@solana/wallet-adapter-react-ui';
 import * as multisig from '@sqds/multisig';
@@ -96,9 +97,7 @@ const ChangeThresholdInput = ({ multisigPda, transactionIndex }: ChangeThreshold
 
     toast.loading('Waiting for wallet approval...', { id: 'transaction', duration: Infinity });
 
-    const signature = await wallet.sendTransaction(transaction, connection, {
-      skipPreflight: true,
-    });
+    const signature = await signAndSend(wallet, transaction, connection);
     signatureRef.current = signature;
 
     const shortSig = `${signature.slice(0, 8)}...${signature.slice(-4)}`;

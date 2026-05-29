@@ -17,6 +17,7 @@ import {
 } from '@solana/spl-token';
 import * as multisig from '@sqds/multisig';
 import { useWallet } from '@solana/wallet-adapter-react';
+import { signAndSend } from '@/lib/signAndSend';
 import { PublicKey, TransactionMessage, VersionedTransaction } from '@solana/web3.js';
 import { useWalletModal } from '@solana/wallet-adapter-react-ui';
 import { Input } from './ui/input';
@@ -149,9 +150,7 @@ const SendTokens = ({
 
     toast.loading('Waiting for wallet approval...', { id: 'transaction', duration: Infinity });
 
-    const signature = await wallet.sendTransaction(transaction, connection, {
-      skipPreflight: true,
-    });
+    const signature = await signAndSend(wallet, transaction, connection);
     signatureRef.current = signature;
 
     const shortSig = `${signature.slice(0, 8)}...${signature.slice(-4)}`;

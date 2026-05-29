@@ -2,6 +2,7 @@ import SetProgramIdInput from '@/components/SetProgramIdInput';
 import SetRpcUrlInput from '@/components/SetRpcUrlnput';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import SetExplorerInput from '../components/SetExplorerInput';
+import SetJitoTipInput from '../components/SetJitoTipInput';
 import { ErrorBoundary } from '@/components/ErrorBoundary';
 import { Suspense } from 'react';
 
@@ -37,6 +38,18 @@ const SettingsPage = () => {
               </CardHeader>
               <CardContent>
                 <SetExplorerInput />
+              </CardContent>
+            </Card>
+            <Card>
+              <CardHeader>
+                <CardTitle>Jito Tips</CardTitle>
+                <CardDescription>
+                  Opt in to Jito MEV protection by adding a SOL tip to each transaction.
+                  Off by default — transactions submit directly via your RPC.
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <SetJitoTipInput />
               </CardContent>
             </Card>
           </div>

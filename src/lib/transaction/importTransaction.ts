@@ -13,6 +13,7 @@ import { toast } from 'sonner';
 import { loadLookupTables } from './getAccountsForSimulation';
 import { waitForConfirmation } from '~/lib/transactionConfirmation';
 import { buildProposalIx } from '~/lib/multisigUtils';
+import { signAndSend } from '~/lib/signAndSend';
 
 export const importTransaction = async (
   tx: string,
@@ -74,9 +75,7 @@ export const importTransaction = async (
 
     toast.loading('Waiting for wallet approval...', { id: 'transaction', duration: Infinity });
 
-    const signature = await wallet.sendTransaction(transaction, connection, {
-      skipPreflight: true,
-    });
+    const signature = await signAndSend(wallet, transaction, connection);
 
     const shortSig = `${signature.slice(0, 8)}...${signature.slice(-4)}`;
     toast.info(`Sent: ${signature}`, { duration: 6000 });

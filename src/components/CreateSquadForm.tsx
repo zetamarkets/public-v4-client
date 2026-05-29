@@ -5,6 +5,7 @@ import { Member, createMultisig } from '@/lib/createSquad';
 import { formatTransactionError } from '@/lib/utils';
 import { Keypair, PublicKey } from '@solana/web3.js';
 import { useWallet } from '@solana/wallet-adapter-react';
+import { signAndSend } from '@/lib/signAndSend';
 import { CheckSquare, Copy, ExternalLink, PlusCircleIcon, XIcon } from 'lucide-react';
 import {
   Select,
@@ -36,7 +37,8 @@ interface CreateSquadFormData {
 }
 
 export default function CreateSquadForm({}: {}) {
-  const { publicKey, connected, sendTransaction } = useWallet();
+  const { publicKey, connected } = useWallet();
+  const wallet = useWallet();
 
   const { connection, programId } = useMultisigData();
   const { setMultisigAddress } = useMultisigAddress();
@@ -79,10 +81,7 @@ export default function CreateSquadForm({}: {}) {
 
       toast.loading('Waiting for wallet approval...', { id: 'create', duration: Infinity });
 
-      const signature = await sendTransaction(transaction, connection, {
-        skipPreflight: true,
-        signers: [createKey],
-      });
+      const signature = await signAndSend(wallet, transaction, connection, [createKey]);
       signatureRef.current = signature;
 
       const shortSig = `${signature.slice(0, 8)}...${signature.slice(-4)}`;
@@ -97,8 +96,6 @@ export default function CreateSquadForm({}: {}) {
       setMultisigAddress.mutate(multisig.toBase58());
 
       return { signature, multisig: multisig.toBase58() };
-    } catch (error: unknown) {
-      throw error;
     } finally {
       await new Promise((resolve) => setTimeout(resolve, 5000));
     }

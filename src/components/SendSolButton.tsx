@@ -11,6 +11,7 @@ import { formatTransactionError } from '@/lib/utils';
 import { useState, useRef } from 'react';
 import * as multisig from '@sqds/multisig';
 import { useWallet } from '@solana/wallet-adapter-react';
+import { signAndSend } from '@/lib/signAndSend';
 import {
   LAMPORTS_PER_SOL,
   PublicKey,
@@ -110,9 +111,7 @@ const SendSol = ({ multisigPda, vaultIndex }: SendSolProps) => {
 
     toast.loading('Waiting for wallet approval...', { id: 'transaction', duration: Infinity });
 
-    const signature = await wallet.sendTransaction(transaction, connection, {
-      skipPreflight: true,
-    });
+    const signature = await signAndSend(wallet, transaction, connection);
     signatureRef.current = signature;
 
     const shortSig = `${signature.slice(0, 8)}...${signature.slice(-4)}`;

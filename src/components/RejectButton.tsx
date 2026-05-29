@@ -4,6 +4,7 @@ import { Button } from './ui/button';
 import * as multisig from '@sqds/multisig';
 import { useRef, useState } from 'react';
 import { useWallet } from '@solana/wallet-adapter-react';
+import { signAndSend } from '@/lib/signAndSend';
 import { useWalletModal } from '@solana/wallet-adapter-react-ui';
 import { toast } from 'sonner';
 import { useMultisigData } from '@/hooks/useMultisigData';
@@ -78,9 +79,7 @@ const RejectButton = ({
 
     toast.loading('Waiting for wallet approval...', { id: 'transaction', duration: Infinity });
 
-    const signature = await wallet.sendTransaction(transaction, connection, {
-      skipPreflight: true,
-    });
+    const signature = await signAndSend(wallet, transaction, connection);
     signatureRef.current = signature;
 
     const shortSig = `${signature.slice(0, 8)}...${signature.slice(-4)}`;

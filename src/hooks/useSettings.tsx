@@ -61,6 +61,41 @@ export const useProgramId = () => {
   return { programId, setProgramId };
 };
 
+// Jito tips
+const DEFAULT_JITO_TIP = 1_000; // lamports
+
+export const useJitoTip = () => {
+  const queryClient = useQueryClient();
+
+  const { data: jitoEnabled } = useSuspenseQuery({
+    queryKey: ['jitoEnabled'],
+    queryFn: () => Promise.resolve(localStorage.getItem('x-jito-enabled') === 'true'),
+  });
+
+  const { data: jitoTip } = useSuspenseQuery({
+    queryKey: ['jitoTip'],
+    queryFn: () => Promise.resolve(Number(localStorage.getItem('x-jito-tip') || DEFAULT_JITO_TIP)),
+  });
+
+  const setJitoEnabled = useMutation({
+    mutationFn: (enabled: boolean) => {
+      localStorage.setItem('x-jito-enabled', String(enabled));
+      return Promise.resolve(enabled);
+    },
+    onSuccess: (enabled) => queryClient.setQueryData(['jitoEnabled'], enabled),
+  });
+
+  const setJitoTip = useMutation({
+    mutationFn: (lamports: number) => {
+      localStorage.setItem('x-jito-tip', String(lamports));
+      return Promise.resolve(lamports);
+    },
+    onSuccess: (lamports) => queryClient.setQueryData(['jitoTip'], lamports),
+  });
+
+  return { jitoEnabled: jitoEnabled ?? false, jitoTip: jitoTip ?? DEFAULT_JITO_TIP, setJitoEnabled, setJitoTip };
+};
+
 // explorer url
 const DEFAULT_EXPLORER_URL = 'https://explorer.solana.com';
 const getExplorerUrl = () => {
